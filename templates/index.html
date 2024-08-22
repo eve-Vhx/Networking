@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ROS Topics Live</title>
+    <script type="text/javascript">
+        // Function to fetch and display ROS topics
+        function fetchTopics() {
+            fetch('/topics')
+                .then(response => response.json())
+                .then(data => {
+                    const messagesDiv = document.getElementById('messages');
+                    messagesDiv.innerHTML = '<h2>Available Topics:</h2>';
+                    
+                    data.forEach(topic => {
+                        if (topic) {
+                            messagesDiv.innerHTML += `<p>${topic}</p>`;
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching topics:', error);
+                });
+        }
+
+        // Fetch topics on page load
+        window.onload = function() {
+            fetchTopics();  // Initial fetch
+
+            // Set up periodic refresh every 10 seconds
+            setInterval(fetchTopics, 10000);  // 10000 milliseconds = 10 seconds
+        };
+    </script>
+</head>
+<body>
+    <h1>ROS Topics Live</h1>
+    <div id="messages">Loading topics...</div>
+</body>
+</html>
