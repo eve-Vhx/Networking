@@ -1,5 +1,5 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.9-slim
+# Use the official Ubuntu 20.04 image from the Docker Hub
+FROM ubuntu:20.04
 
 # Set the working directory
 WORKDIR /app
@@ -22,7 +22,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
-RUN pip install flask pyyaml
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    && pip3 install flask pyyaml \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install rclpy
 RUN apt-get update && apt-get install -y \
@@ -39,4 +42,4 @@ EXPOSE 5000
 ENV NAME FlaskApp
 
 # Source the ROS 2 setup script and run app.py when the container launches
-CMD ["bash", "-c", "source /opt/ros/foxy/setup.bash && python app.py"]
+CMD ["bash", "-c", "source /opt/ros/foxy/setup.bash && python3 app.py"]
