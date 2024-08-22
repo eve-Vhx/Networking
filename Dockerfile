@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Install the required packages
-RUN pip install flask launch-ros pyyaml
+RUN pip install flask pyyaml
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
