@@ -3,7 +3,7 @@ import sys
 import requests
 import json
 
-JANUS_URL = "http://34.230.54.205:8088/janus"
+JANUS_URL = "http://127.0.0.1:8088/janus"
 admin_key = "janusoverlord"
 
 def create_session():
